@@ -28,23 +28,23 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
+  // Controllers
   final realController = TextEditingController();
   final dolarController = TextEditingController();
   final euroController = TextEditingController();
   final pesoController = TextEditingController();
-
+  // variables to store currency values
   double dolar;
   double euro;
   double peso;
-
+  // function to clear application fields
   void _clearAll(){
     realController.text = "";
     dolarController.text = "";
     euroController.text = "";
     pesoController.text = "";
   }
-
+  // REAL conversion function
   void _realChanged(String text){
     if(text.isEmpty) {
       _clearAll();
@@ -55,6 +55,7 @@ class _HomeState extends State<Home> {
     euroController.text = (real/euro).toStringAsFixed(2);
     pesoController.text = (real/peso).toStringAsFixed(2);
   }
+  // DOLAR conversion function
   void _dolarChanged(String text){
     if(text.isEmpty) {
       _clearAll();
@@ -65,6 +66,7 @@ class _HomeState extends State<Home> {
     euroController.text = (dolar*this.dolar / euro).toStringAsFixed(2);
     pesoController.text = (dolar * this.dolar / peso).toStringAsFixed(2);
   }
+  // EURO conversion function
   void _euroChanged(String text){
     if(text.isEmpty) {
       _clearAll();
@@ -75,6 +77,8 @@ class _HomeState extends State<Home> {
     dolarController.text = (euro * this.euro / dolar).toStringAsFixed(2);
     pesoController.text = (euro * this.euro / peso).toStringAsFixed(2);
   }
+
+  // PESO conversion function
   void _pesoChanged(String text){
     if(text.isEmpty) {
       _clearAll();
@@ -119,6 +123,7 @@ class _HomeState extends State<Home> {
                   textAlign: TextAlign.center,
                 ));
               } else {
+                // variables to store values ​​from a JSON file
                 dolar = snapshot.data["results"]["currencies"]["USD"]["buy"];
                 euro = snapshot.data["results"]["currencies"]["EUR"]["buy"];
                 peso = snapshot.data["results"]["currencies"]["ARS"]["buy"];
@@ -147,7 +152,7 @@ class _HomeState extends State<Home> {
     );
   }
 }
-
+// function to build the widgets
 Widget buildTextField(String label, String prefix, TextEditingController controller, Function f) {
   return TextField(
     controller: controller,
